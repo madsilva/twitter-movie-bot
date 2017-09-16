@@ -22,9 +22,20 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            {% for movie in now_playing_list %}
-            <p>{{movie.title}}</p>
-            {% endfor %}
+            <div class="row">
+                <form action="" method="get">
+                <input type="hidden" name="submit" value="submit">
+                {{ movie_form }}
+                <input type="submit" value="View map">
+                    </form>
+            </div>
+            <div class="row">
+                {% if image_url %}
+                <img src="{{image_url}}" width="400px" height="600px">
+                {% endif %}
+            </div>
+
+
         </div>
         <div class="col-sm-6">
             <p>map goes here</p>
