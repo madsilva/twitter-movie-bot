@@ -1,6 +1,0 @@
-venv/*
-media/*
-.idea/*
-ignore/*
-*.pyc
-*.sqlite3
