@@ -1,5 +1,4 @@
 import string
-
 import tweepy
 from tweepy import Cursor
 
@@ -12,20 +11,14 @@ API_SECRET = 'nxiKfdz6KLssInHVBcAK7SUWdBMysxZl6F9Xq0rwFSZxE52hVP'
 ACCESS_TOKEN = '909139089852649473-yXmeYbK4ib2eGs3UE2Xcw3YzR9IQH53'
 ACCESS_TOKEN_SECRET = 'bcTn7Yhd1ansZlgAkQQSCnu3Bw5NGvCSqF2lKhKlVLwme'
 
-
-
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 api = tweepy.API(auth)
 
-date = datetime.today()
-end_date = datetime.today() - timedelta(days=10)
 sentiment_analysis_vals = {}
 
-
 search = api.user_timeline(id="POTUS", count=800)
-count = 0
 try:
     for tweet in search:
         day = tweet.created_at.strftime('%Y-%m-%d')
@@ -47,7 +40,6 @@ for i in sentiment_analysis_vals:
         sentiment_analysis_vals[i] = 0
     else:
         sentiment_analysis_vals[i] = total/length
-
 
 print(sentiment_analysis_vals)
 
