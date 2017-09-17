@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- title is placed in block so it can be overriden on other pages -->
-    <title>Movie Heatmap</title>
+    <title>Tweet Mood Over Time</title>
 
     <!-- including JS, JQuery, and Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,44 +16,34 @@
 
 <body>
 
-<div class="container-fluid" align="center">
+<div class="container-fluid" style="max-width: 1300px">
     <div class="row">
         <div class="col-sm-12">
-            <h1 style="font-family: 'Passion One', cursive; font-size: 500%">Twitter Movie Mentions Heatmap</h1>
+            <h1 style="font-family: 'Passion One', cursive; font-size: 500%">Tweet Mood Over Time</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p>Twitter Users</p>
+            <form action="" method="get">
+                <input type="hidden" name="submit" value="submit">
+                {{ form }}
+                <input type="submit" value="View map">
+            </form>
+            {% if user_image_url %}
+            <img src="{{user_image_url}}" width="100px" height="100px">
+            {% endif %}
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <div class="row">
-                <p>Where are people talking about...</p>
-            </div>
-            <div class="row">
-                <p>Movies currently in theaters</p>
-                <form action="" method="get">
-                <input type="hidden" name="submit" value="submit">
-                {{ np_movie_form }}
-                <input type="submit" value="View map">
-                    </form>
-                <p>Popular movies</p>
-                <form action="" method="get">
-                <input type="hidden" name="submit" value="submit">
-                {{ pop_movie_form }}
-                <input type="submit" value="View map">
-                    </form>
-            </div>
-            <div class="row">
-                {% if image_url %}
-                <img src="{{image_url}}" width="400px" height="600px">
-                {% endif %}
-            </div>
-
-
-        </div>
-        <div class="col-sm-6">
-            <p>map goes here</p>
+        <div class="col-sm-12">
+            {% load static %}
+            <img src="{{ graph_url }}" />
         </div>
     </div>
 </div>
+
 
 
 </body>
