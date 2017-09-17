@@ -41,7 +41,3 @@ while date > end_date:
     date = date - timedelta(days=1)
     if count >0:
         print(sum/count)
-
-
-
-
