@@ -53,6 +53,7 @@ plt.xlabel('Time', fontsize=15)
 plt.ylabel("Average Tweet Sentiment Per Day", fontsize=15)
 
 plt.plot(x,y)
+plt.scatter(x,y)
 plt.axhline(y=0, xmin=0, xmax=3, c="black",linewidth = 2, zorder=0)
 
 plt.show()
