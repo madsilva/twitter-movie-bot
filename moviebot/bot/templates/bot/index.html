@@ -16,30 +16,36 @@
 
 <body>
 
-<div class="container-fluid" style="max-width: 1300px">
+<div class="container" style="max-width: 1300px">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 text-center">
             <h1 style="font-family: 'Passion One', cursive; font-size: 500%">Tweet Mood Over Time</h1>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row text-center">
         <div class="col-sm-12">
-            <p>Twitter Users</p>
             <form action="" method="get">
                 <input type="hidden" name="submit" value="submit">
                 {{ form }}
-                <input type="submit" value="View map">
+                <br />
+                <input type="submit" value="View graph" class="btn btn-primary">
+                <br />
+                <br />
             </form>
-            {% if user_image_url %}
-            <img src="{{user_image_url}}" width="100px" height="100px">
+            <div class="text-center">
+                {% if user_image_url %}
+            <img src="{{user_image_url}}" width="150px" height="150px" style="border-radius: 75px; border-style: solid; border-width: 5px; border-color: #00aced;">
             {% endif %}
+            </div>
+
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            {% load static %}
+            {% if graph_url %}
             <img src="{{ graph_url }}" />
+            {% endif %}
         </div>
     </div>
 </div>
