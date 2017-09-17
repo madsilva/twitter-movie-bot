@@ -1,3 +1,5 @@
+import string
+
 import tweepy
 from tweepy import Cursor
 
@@ -18,26 +20,30 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 date = datetime.today()
-end_date = datetime.today() - timedelta(days=45)
+end_date = datetime.today() - timedelta(days=1)
 sentiment_analysis_vals = {}
 while date > end_date:
     until = date + timedelta(days=1)
-    query = "from:POTUS since:" + date.strftime('%Y-%m-%d') + " until:" + until.strftime('%Y-%m-%d')
+    query = "@POTUS since:" + date.strftime('%Y-%m-%d') + " until:" + until.strftime('%Y-%m-%d')
     max_tweets = 100
-    search = api.search(q=query, count=max_tweets)
+    search = api.user_timeline(id="POTUS", count=400)
     sum = 0
-    count = 0
+    count = 0j
     try:
         for tweet in search:
 
-            analysis = TextBlob(tweet.text)
-            print(tweet.text)
+            listcomp = [x for x in tweet.text if x in string.printable]
+            clean_tweet = ''.join(listcomp)
+            print(clean_tweet)
+            analysis = TextBlob(clean_tweet)
             sum += analysis.sentiment.polarity
             count+= 1
-            if count > 3:
-                break
     except tweepy.TweepError as e:
         print(e)
     date = date - timedelta(days=1)
-    if count >0:
-        print(sum/count)
+    if count > 0:
+        sentiment_analysis_vals[date.strftime('%Y-%m-%d')] = sum/count
+    else:
+        sentiment_analysis_vals[date.strftime('%Y-%m-%d')] = 0
+
+print(sentiment_analysis_vals)
