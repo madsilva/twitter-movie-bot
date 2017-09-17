@@ -1,6 +1,8 @@
 import string
 import tweepy
 import matplotlib.pyplot as plt
+import pylab
+from pylab import figure, axes, pie, title, show
 import datetime
 from textblob import TextBlob
 
@@ -13,9 +15,9 @@ auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 api = tweepy.API(auth)
-
+user = input("Who's tweets do you want to analyze? Enter their twitter ID: ")
 sentiment_analysis_vals = {}
-search = api.user_timeline(id="POTUS", count = 200)
+search = api.user_timeline(id=user, count = 200)
 try:
     for tweet in search:
         day = tweet.created_at.strftime('%Y-%m-%d')
@@ -40,7 +42,6 @@ for i in sentiment_analysis_vals:
 
 vals = {}
 for i in sentiment_analysis_vals:
-    #datetime.date(2017, 1, 1)
     list = [y for y in i.split("-")]
     x = datetime.date(int(list[0]), int(list[1]), int(list[2]))
     vals[x] = sentiment_analysis_vals[i]
@@ -48,7 +49,7 @@ for i in sentiment_analysis_vals:
 x,y = zip(*sorted(vals.items()))
 
 plt.figure(figsize=(100,80))
-plt.title("Sentiment Analysis for POTUS by day for last 200 tweets", fontsize = 20)
+plt.title("Sentiment Analysis for " + user + " by day for last 200 tweets", fontsize = 20)
 plt.xlabel('Time', fontsize=15)
 plt.ylabel("Average Tweet Sentiment Per Day", fontsize=15)
 
@@ -57,5 +58,6 @@ plt.scatter(x,y)
 plt.axhline(y=0, xmin=0, xmax=3, c="black",linewidth = 2, zorder=0)
 
 plt.show()
+
 
 
