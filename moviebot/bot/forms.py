@@ -11,8 +11,19 @@ def get_movie_names():
         now_playing_list.append((movie['id'], movie['title']))
     return now_playing_list
 
-class MovieForm(forms.Form):
+class NowPlayingMovieForm(forms.Form):
     movie = forms.ChoiceField(get_movie_names)
+
+def get_pop_names():
+    movies = tmdb.Movies()
+    pop_dict = movies.popular()['results']
+    pop_list = []
+    for movie in pop_dict:
+        pop_list.append((movie['id'], movie['title']))
+    return pop_list
+
+class PopularMovieForm(forms.Form):
+    movie = forms.ChoiceField(get_pop_names)
 
 
 

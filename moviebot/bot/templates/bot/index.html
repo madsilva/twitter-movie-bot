@@ -10,6 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 </head>
 
 <body>
@@ -17,15 +19,25 @@
 <div class="container-fluid" align="center">
     <div class="row">
         <div class="col-sm-12">
-            <h1>Twitter Movie Mentions Heatmap</h1>
+            <h1 style="font-family: 'Passion One', cursive; font-size: 500%">Twitter Movie Mentions Heatmap</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
+                <p>Where are people talking about...</p>
+            </div>
+            <div class="row">
+                <p>Movies currently in theaters</p>
                 <form action="" method="get">
                 <input type="hidden" name="submit" value="submit">
-                {{ movie_form }}
+                {{ np_movie_form }}
+                <input type="submit" value="View map">
+                    </form>
+                <p>Popular movies</p>
+                <form action="" method="get">
+                <input type="hidden" name="submit" value="submit">
+                {{ pop_movie_form }}
                 <input type="submit" value="View map">
                     </form>
             </div>
