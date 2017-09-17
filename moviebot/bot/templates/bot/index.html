@@ -4,22 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- title is placed in block so it can be overriden on other pages -->
-    <title>Tweet Mood Over Time</title>
+    <title>Twitter Mood</title>
 
     <!-- including JS, JQuery, and Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container" style="max-width: 1300px">
+<div class="container" style="max-width: 1200px">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <h1 style="font-family: 'Passion One', cursive; font-size: 500%">Tweet Mood Over Time</h1>
+            <h1 style="font-family: 'Passion One', cursive; font-size: 400%">Twitter Mood</h1>
         </div>
     </div>
 
@@ -30,21 +29,34 @@
                 {{ form }}
                 <br />
                 <input type="submit" value="View graph" class="btn btn-primary">
-                <br />
-                <br />
             </form>
-            <div class="text-center">
-                {% if user_image_url %}
-            <img src="{{user_image_url}}" width="150px" height="150px" style="border-radius: 75px; border-style: solid; border-width: 5px; border-color: #00aced;">
-            {% endif %}
-            </div>
-
         </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-12">
+        {% if user_image_url %}
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-center">
+
+            <br />
+            <p style="font-family: 'Passion One', cursive; font-size: 200%;">@{{ twitter_user }}</p>
+            <img src="{{user_image_url}}" width="150px" height="150px" style="border-radius: 75px; border-style: solid; border-width: 5px; border-color: #00aced;">
+            <br />
+            <br />
+            <div style="border-style: solid; border-width: 2px; border-color: gray; border-radius: 25px; margin-top: -12px; box-shadow: 5px 5px 5px #888888;">
+                <p style="font-family: 'Passion One', cursive; font-size: 200%; margin-bottom: -7px;">Key: </p>
+                <p>1 = most positive <br /> 0 = neutral <br /> -1 = most negative</p>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+        {% endif %}
+    </div>
+
+    <div class="row text-center center">
+        <div class="col-sm-12 text-center">
             {% if graph_url %}
-            <img src="{{ graph_url }}" />
+            <br/>
+            <img class="center-block img-responsive" src="{{ graph_url }}" style="size: 80%"/>
             {% endif %}
         </div>
     </div>
