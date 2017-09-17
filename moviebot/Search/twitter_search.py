@@ -1,9 +1,7 @@
 import string
 import tweepy
-from tweepy import Cursor
-
-from datetime import datetime, timedelta
-import re
+import matplotlib.pyplot as plt
+import datetime
 from textblob import TextBlob
 
 API_KEY = 'NGLR87Co1AT64D39ipkViztQN'
@@ -17,8 +15,7 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 sentiment_analysis_vals = {}
-
-search = api.user_timeline(id="POTUS", count=800)
+search = api.user_timeline(id="POTUS", count = 200)
 try:
     for tweet in search:
         day = tweet.created_at.strftime('%Y-%m-%d')
@@ -41,7 +38,23 @@ for i in sentiment_analysis_vals:
     else:
         sentiment_analysis_vals[i] = total/length
 
-print(sentiment_analysis_vals)
+vals = {}
+for i in sentiment_analysis_vals:
+    #datetime.date(2017, 1, 1)
+    list = [y for y in i.split("-")]
+    x = datetime.date(int(list[0]), int(list[1]), int(list[2]))
+    vals[x] = sentiment_analysis_vals[i]
+    
+x,y = zip(*sorted(vals.items()))
 
+plt.figure(figsize=(100,80))
+plt.title("Sentiment Analysis for POTUS by day for last 200 tweets", fontsize = 20)
+plt.xlabel('Time', fontsize=15)
+plt.ylabel("Average Tweet Sentiment Per Day", fontsize=15)
+
+plt.plot(x,y)
+plt.axhline(y=0, xmin=0, xmax=3, c="black",linewidth = 2, zorder=0)
+
+plt.show()
 
 
